@@ -68,8 +68,8 @@ export default function FeaturesSection() {
               {t.features.sectionLabel}
             </p>
             <h2
-              className="font-display text-title text-nevoa mb-5"
-              style={{ fontFamily: "var(--font-display)" }}
+              className="font-display text-title mb-5"
+              style={{ fontFamily: "var(--font-display)", color: "var(--color-dourado)" }}
             >
               {t.features.headline}
             </h2>
@@ -130,8 +130,8 @@ export default function FeaturesSection() {
 
                   {/* Título */}
                   <h3
-                    className="font-display text-section text-nevoa mb-4"
-                    style={{ fontFamily: "var(--font-display)" }}
+                    className="font-display text-section mb-4"
+                    style={{ fontFamily: "var(--font-display)", color: "var(--color-dourado)" }}
                   >
                     {f.title}
                   </h3>
