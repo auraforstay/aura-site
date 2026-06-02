@@ -50,32 +50,28 @@ export default function ForWhoSection() {
           {t.forWho.profiles.map((p, i) => (
             <div
               key={i}
-              className="flex flex-col rounded-card p-7 md:p-8 border shadow-card hover:shadow-card-hover transition-shadow duration-300 group"
-              style={{
-                borderColor: "var(--color-linho)",
-                backgroundColor: "var(--color-terra-50)",
-              }}
+              className="flex flex-col rounded-card p-7 md:p-8 border border-linho bg-terra-50 shadow-card hover:shadow-elevated hover:-translate-y-2 hover:bg-carvao hover:border-carvao transition-all duration-300 group cursor-default"
             >
               {/* Icon */}
-              <div className="mb-6 text-floresta group-hover:text-musgo transition-colors duration-200">
+              <div className="mb-6 text-floresta group-hover:text-nevoa transition-colors duration-300">
                 {profileIcons[i]}
               </div>
 
               {/* Text */}
               <h3
-                className="font-display text-card text-carvao mb-1"
+                className="font-display text-card text-carvao group-hover:text-nevoa mb-1 transition-colors duration-300"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 {p.title}
               </h3>
-              <p className="text-caption text-pedra mb-4">{p.sub}</p>
-              <p className="text-body text-pedra flex-1">{p.desc}</p>
+              <p className="text-caption text-pedra group-hover:text-nevoa/70 mb-4 transition-colors duration-300">{p.sub}</p>
+              <p className="text-body text-pedra group-hover:text-nevoa/70 flex-1 transition-colors duration-300">{p.desc}</p>
 
               {/* Recommended plan */}
-              <div className="mt-6 pt-5 border-t" style={{ borderColor: "var(--color-linho)" }}>
-                <span className="text-fine text-pedra tracking-aura">{p.planLabel}</span>
+              <div className="mt-6 pt-5 border-t border-linho group-hover:border-white/20 transition-colors duration-300">
+                <span className="text-fine text-pedra group-hover:text-nevoa/50 tracking-aura transition-colors duration-300">{p.planLabel}</span>
                 <p
-                  className="font-mono text-caption font-medium text-floresta mt-1"
+                  className="font-mono text-caption font-medium text-floresta group-hover:text-dourado mt-1 transition-colors duration-300"
                   style={{ fontFamily: "var(--font-mono)" }}
                 >
                   {p.plan}
