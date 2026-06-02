@@ -31,7 +31,7 @@ export default function TestimonialsSection() {
           {t.testimonials.items.map((item, i) => (
             <div
               key={i}
-              className="flex flex-col rounded-card p-7 md:p-8"
+              className="flex flex-col rounded-card p-7 md:p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-elevated cursor-default"
               style={{ backgroundColor: "#ffffff" }}
             >
               {/* Quote mark */}
