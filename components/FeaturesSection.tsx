@@ -7,8 +7,6 @@ type FeatureImage = {
   number: string;
   image: string;
   imageAlt: string;
-  reverse: boolean;
-  objectFit?: "cover" | "contain";
   objectPosition?: string;
   aspectRatio?: string;
   bgColor?: string;
@@ -19,33 +17,29 @@ const featureImages: FeatureImage[] = [
     number: "01",
     image: "/images/financeiro-aura.png",
     imageAlt: "Módulo financeiro no sistema Aura",
-    reverse: false,
-    objectFit: "cover",
     objectPosition: "left center",
-    aspectRatio: "1672/940",
+    aspectRatio: "16/9",
     bgColor: "#ffffff",
   },
   {
     number: "02",
     image: "/images/glamping-walkway.jpg",
     imageAlt: "Passarela de glamping entre as cabines",
-    reverse: true,
+    aspectRatio: "4/3",
   },
   {
     number: "03",
     image: "/images/servicos-aura-v2.png",
     imageAlt: "Módulo de serviços no sistema Aura",
-    reverse: false,
-    objectFit: "cover",
     objectPosition: "left center",
-    aspectRatio: "1672/941",
+    aspectRatio: "16/9",
     bgColor: "#ffffff",
   },
   {
     number: "04",
     image: "/images/cabin-interior.png",
     imageAlt: "Interior aconchegante de uma hospedagem",
-    reverse: true,
+    aspectRatio: "4/3",
   },
 ];
 
@@ -53,123 +47,179 @@ export default function FeaturesSection() {
   const { t } = useLanguage();
 
   return (
-    <section
-      className="bg-floresta py-20 md:py-28 lg:py-36"
-      id="funcionalidades"
-    >
-      <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
-        {/* Header */}
-        <div className="mb-16 md:mb-24 max-w-2xl">
-          <p className="section-label mb-6" style={{ color: "rgba(245,241,236,0.55)" }}>{t.features.sectionLabel}</p>
-          <h2
-            className="font-display text-title text-nevoa"
-            style={{ fontFamily: "var(--font-display)" }}
+    <section id="funcionalidades" className="bg-floresta">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row">
+
+          {/* ── Esquerda: fixa (sticky) ── */}
+          <div
+            className="
+              lg:sticky lg:top-0 lg:h-screen
+              lg:w-[38%] xl:w-[36%] shrink-0
+              flex flex-col justify-center
+              px-5 md:px-8 lg:pl-12 xl:pl-16 lg:pr-10
+              py-20 lg:py-0
+            "
           >
-            {t.features.headline}
-            <span className="text-nevoa/60"> {t.features.headlineAccent}</span>
-          </h2>
-        </div>
+            <p
+              className="section-label mb-6"
+              style={{ color: "rgba(245,241,236,0.5)" }}
+            >
+              {t.features.sectionLabel}
+            </p>
+            <h2
+              className="font-display text-title text-nevoa mb-5"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              {t.features.headline}
+            </h2>
+            <p
+              className="text-body"
+              style={{ color: "rgba(245,241,236,0.65)" }}
+            >
+              {t.features.sub}
+            </p>
 
-        {/* Feature blocks */}
-        <div className="flex flex-col gap-20 md:gap-28">
-          {t.features.items.map((f, idx) => {
-            const layout = featureImages[idx];
-            return (
-              <div
-                key={layout.number}
-                className={`flex flex-col gap-8 md:gap-12 lg:gap-20 ${
-                  layout.reverse
-                    ? "lg:flex-row-reverse"
-                    : "lg:flex-row"
-                } items-center`}
+            {/* Indicador de scroll — só desktop */}
+            <div className="hidden lg:flex items-center gap-3 mt-14">
+              <div className="flex flex-col items-center gap-1">
+                <div className="w-1 h-1 rounded-full" style={{ backgroundColor: "rgba(245,241,236,0.5)" }} />
+                <div className="w-px h-8 rounded-full" style={{ backgroundColor: "rgba(245,241,236,0.15)" }} />
+              </div>
+              <span
+                className="text-fine tracking-aura"
+                style={{ color: "rgba(245,241,236,0.35)" }}
               >
-                {/* Image */}
-                <div className="w-full lg:w-1/2 shrink-0">
-                  <div
-                    className="relative rounded-card overflow-hidden shadow-elevated"
-                    style={{
-                      aspectRatio: layout.aspectRatio ?? "4/3",
-                      backgroundColor: layout.bgColor ?? "transparent",
-                    }}
-                  >
-                    <Image
-                      src={layout.image}
-                      alt={layout.imageAlt}
-                      fill
-                      className={layout.objectFit === "contain" ? "object-contain" : "object-cover"}
-                      style={{ objectPosition: layout.objectPosition ?? "center" }}
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                    {/* Subtle overlay — skip for UI screenshots */}
-                    {!layout.bgColor && (
-                      <div
-                        className="absolute inset-0"
-                        style={{
-                          background:
-                            "linear-gradient(135deg, rgba(61,90,76,0.08) 0%, transparent 60%)",
-                        }}
-                      />
-                    )}
-                  </div>
-                </div>
+                {t.features.scrollHint}
+              </span>
+            </div>
+          </div>
 
-                {/* Text */}
-                <div className="flex flex-col gap-4 lg:max-w-md">
-                  <span
-                    className="text-fine font-mono font-medium"
-                    style={{ fontFamily: "var(--font-mono)", color: "rgba(245,241,236,0.4)" }}
-                  >
-                    {layout.number}
-                  </span>
+          {/* ── Direita: rolável ── */}
+          <div
+            className="lg:w-[62%] xl:w-[64%] border-t lg:border-t-0 lg:border-l"
+            style={{ borderColor: "rgba(245,241,236,0.12)" }}
+          >
+            {/* Itens de funcionalidade */}
+            {t.features.items.map((f, idx) => {
+              const layout = featureImages[idx];
+              return (
+                <div
+                  key={layout.number}
+                  className="px-5 md:px-8 lg:px-12 xl:px-16 py-16 md:py-20 border-b"
+                  style={{ borderColor: "rgba(245,241,236,0.12)" }}
+                >
+                  {/* Número + tag */}
+                  <div className="flex items-center gap-3 mb-5">
+                    <span
+                      className="font-mono text-fine font-medium tabular-nums"
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        color: "rgba(245,241,236,0.3)",
+                      }}
+                    >
+                      {layout.number}
+                    </span>
+                    <span
+                      className="section-label"
+                      style={{ color: "rgba(245,241,236,0.5)" }}
+                    >
+                      {f.tag}
+                    </span>
+                  </div>
+
+                  {/* Título */}
                   <h3
-                    className="font-display text-section text-nevoa"
+                    className="font-display text-section text-nevoa mb-4"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {f.title}
                   </h3>
-                  <p className="text-body text-nevoa/70">{f.desc}</p>
-                  <p className="text-fine font-medium tracking-aura mt-2" style={{ color: "rgba(245,241,236,0.5)" }}>
+
+                  {/* Descrição */}
+                  <p
+                    className="text-body mb-5 max-w-lg"
+                    style={{ color: "rgba(245,241,236,0.7)" }}
+                  >
+                    {f.desc}
+                  </p>
+
+                  {/* Detalhe (chips) */}
+                  <p
+                    className="text-fine font-medium tracking-aura"
+                    style={{ color: "rgba(245,241,236,0.4)" }}
+                  >
                     {f.detail}
+                  </p>
+
+                  {/* Imagem */}
+                  <div
+                    className="mt-8 rounded-card overflow-hidden shadow-elevated"
+                    style={{ backgroundColor: layout.bgColor ?? "transparent" }}
+                  >
+                    <div
+                      className="relative"
+                      style={{ aspectRatio: layout.aspectRatio ?? "4/3" }}
+                    >
+                      <Image
+                        src={layout.image}
+                        alt={layout.imageAlt}
+                        fill
+                        className="object-cover"
+                        style={{ objectPosition: layout.objectPosition ?? "center" }}
+                        sizes="(max-width: 1024px) 100vw, 62vw"
+                      />
+                      {!layout.bgColor && (
+                        <div
+                          className="absolute inset-0"
+                          style={{
+                            background:
+                              "linear-gradient(135deg, rgba(61,90,76,0.08) 0%, transparent 60%)",
+                          }}
+                        />
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* Extranet callout */}
+            <div className="px-5 md:px-8 lg:px-12 xl:px-16 py-16 md:py-20">
+              <div
+                className="p-8 md:p-10 rounded-card"
+                style={{
+                  backgroundColor: "#ffffff",
+                  boxShadow: "0 4px 32px rgba(30,45,37,0.12)",
+                }}
+              >
+                <div className="flex flex-col gap-4">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="section-label">Exclusivo Aura</span>
+                    <span
+                      className="inline-block px-3 py-1 rounded-full text-fine font-medium"
+                      style={{
+                        backgroundColor: "var(--color-floresta)",
+                        color: "#ffffff",
+                      }}
+                    >
+                      {t.features.extranet.detail}
+                    </span>
+                  </div>
+                  <h3
+                    className="font-display text-card md:text-section text-carvao"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {t.features.extranet.title}
+                  </h3>
+                  <p className="text-body text-pedra max-w-lg">
+                    {t.features.extranet.desc}
                   </p>
                 </div>
               </div>
-            );
-          })}
-        </div>
-
-        {/* Extranet callout */}
-        <div
-          className="mt-20 md:mt-28 p-8 md:p-10 rounded-card"
-          style={{
-            backgroundColor: "#ffffff",
-            boxShadow: "0 4px 32px rgba(30,45,37,0.12)",
-          }}
-        >
-          <div className="flex flex-col md:flex-row md:items-center gap-6">
-            <div className="flex-1">
-              <span className="section-label mb-3 block">Exclusivo Aura</span>
-              <h3
-                className="font-display text-card md:text-section text-carvao mb-3"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                {t.features.extranet.title}
-              </h3>
-              <p className="text-body text-pedra max-w-lg">
-                {t.features.extranet.desc}
-              </p>
-            </div>
-            <div className="shrink-0">
-              <span
-                className="inline-block px-4 py-2 rounded-full text-fine font-medium"
-                style={{
-                  backgroundColor: "var(--color-floresta)",
-                  color: "#ffffff",
-                }}
-              >
-                {t.features.extranet.detail}
-              </span>
             </div>
           </div>
+
         </div>
       </div>
     </section>

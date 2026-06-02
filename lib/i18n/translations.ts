@@ -38,8 +38,10 @@ export const translations = {
     },
     features: {
       sectionLabel: "02 — Funcionalidades",
-      headline: "Tudo que você precisa para",
-      headlineAccent: "operar bem.",
+      headline: "Tudo que você precisar para operar bem está aqui.",
+      headlineAccent: "",
+      sub: "Cada módulo foi pensado para eliminar uma tarefa que você faz manualmente hoje.",
+      scrollHint: "Role para ver tudo",
       items: [
         {
           tag: "Gestão financeira",
@@ -376,8 +378,10 @@ export const translations = {
     },
     features: {
       sectionLabel: "02 — Features",
-      headline: "Everything you need to",
-      headlineAccent: "run it right.",
+      headline: "Everything you need to run your property well is right here.",
+      headlineAccent: "",
+      sub: "Every module was designed to eliminate a task you do manually today.",
+      scrollHint: "Scroll to explore",
       items: [
         {
           tag: "Financial management",
@@ -714,8 +718,10 @@ export const translations = {
     },
     features: {
       sectionLabel: "02 — Funcionalidades",
-      headline: "Todo lo que necesitas para",
-      headlineAccent: "operar bien.",
+      headline: "Todo lo que necesitas para operar bien está aquí.",
+      headlineAccent: "",
+      sub: "Cada módulo fue pensado para eliminar una tarea que haces manualmente hoy.",
+      scrollHint: "Desliza para ver todo",
       items: [
         {
           tag: "Gestión financiera",
