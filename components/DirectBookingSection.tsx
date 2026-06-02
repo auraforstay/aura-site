@@ -1,10 +1,65 @@
 "use client";
 
 import Image from "next/image";
+import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+
+function easeOut(t: number): number {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+function useCounterAnimation(target: number, duration: number, active: boolean) {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    if (!active) return;
+    const start = performance.now();
+    let raf: number;
+
+    function tick(now: number) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      setValue(Math.round(easeOut(progress) * target));
+      if (progress < 1) raf = requestAnimationFrame(tick);
+    }
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [active, target, duration]);
+
+  return value;
+}
 
 export default function DirectBookingSection() {
   const { t } = useLanguage();
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [animated, setAnimated] = useState(false);
+
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setAnimated(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const DURATION = 1300;
+  const otaValue   = useCounterAnimation(425, DURATION, animated);
+  const feeValue   = useCounterAnimation(75,  DURATION, animated);
+  const directValue = useCounterAnimation(500, DURATION, animated);
+
+  const otaWidth    = animated ? "85%"  : "0%";
+  const directWidth = animated ? "100%" : "0%";
 
   return (
     <section
@@ -56,6 +111,7 @@ export default function DirectBookingSection() {
           <div className="flex-1 max-w-md">
             {/* Calculation card */}
             <div
+              ref={cardRef}
               className="rounded-card p-7 md:p-8"
               style={{ backgroundColor: "#ffffff", boxShadow: "0 4px 32px rgba(0,0,0,0.18)" }}
             >
@@ -74,7 +130,7 @@ export default function DirectBookingSection() {
                     className="font-mono text-card font-medium"
                     style={{ fontFamily: "var(--font-mono)", color: "var(--color-carvao)" }}
                   >
-                    R$ 425
+                    R$ {otaValue}
                   </span>
                 </div>
                 <div className="flex items-end justify-between">
@@ -83,7 +139,7 @@ export default function DirectBookingSection() {
                     className="font-mono text-caption font-medium"
                     style={{ fontFamily: "var(--font-mono)", color: "var(--color-pedra)" }}
                   >
-                    R$ 75 (15%)
+                    R$ {feeValue} ({Math.round((feeValue / (otaValue + feeValue || 1)) * 100) || 0}%)
                   </span>
                 </div>
                 <div
@@ -92,7 +148,11 @@ export default function DirectBookingSection() {
                 >
                   <div
                     className="h-full rounded-full"
-                    style={{ width: "85%", backgroundColor: "var(--color-musgo)" }}
+                    style={{
+                      width: otaWidth,
+                      backgroundColor: "var(--color-musgo)",
+                      transition: animated ? "width 1.3s cubic-bezier(0.22,1,0.36,1)" : "none",
+                    }}
                   />
                 </div>
               </div>
@@ -111,7 +171,7 @@ export default function DirectBookingSection() {
                     className="font-mono text-card font-medium"
                     style={{ fontFamily: "var(--font-mono)", color: "var(--color-floresta)" }}
                   >
-                    R$ 500
+                    R$ {directValue}
                   </span>
                 </div>
                 <div
@@ -120,7 +180,11 @@ export default function DirectBookingSection() {
                 >
                   <div
                     className="h-full rounded-full"
-                    style={{ width: "100%", backgroundColor: "var(--color-dourado)" }}
+                    style={{
+                      width: directWidth,
+                      backgroundColor: "var(--color-dourado)",
+                      transition: animated ? "width 1.3s cubic-bezier(0.22,1,0.36,1)" : "none",
+                    }}
                   />
                 </div>
               </div>
