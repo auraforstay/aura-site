@@ -35,13 +35,12 @@ export default function PricingSection() {
                 key={plan.name}
                 className={`flex flex-col rounded-card overflow-hidden transition-shadow duration-300 ${
                   highlighted
-                    ? "shadow-elevated"
+                    ? "shadow-elevated animated-border-card"
                     : "shadow-card hover:shadow-card-hover border"
                 }`}
                 style={{
                   backgroundColor: "#ffffff",
                   borderColor: highlighted ? undefined : "rgba(245,241,236,0.15)",
-                  outline: highlighted ? "2px solid var(--color-carvao)" : undefined,
                 }}
               >
                 {/* Badge */}

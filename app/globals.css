@@ -93,6 +93,31 @@
   }
 }
 
+/* ─── Animated border (plano Core) ──────────────────── */
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-border {
+  to { --border-angle: 360deg; }
+}
+
+.animated-border-card {
+  background:
+    linear-gradient(white, white) padding-box,
+    conic-gradient(
+      from var(--border-angle),
+      #C9A96E 0%,
+      #2C2A25 35%,
+      #3D5A4C 65%,
+      #C9A96E 100%
+    ) border-box;
+  border: 2px solid transparent;
+  animation: spin-border 3s linear infinite;
+}
+
 /* ─── Utilities ─────────────────────────────────────── */
 @layer utilities {
   /* Typography scale */
