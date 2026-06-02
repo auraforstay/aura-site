@@ -40,7 +40,7 @@ export const translations = {
       sectionLabel: "02 — Funcionalidades",
       headline: "Tudo que você precisar para operar bem está aqui.",
       headlineAccent: "",
-      sub: "Cada módulo foi pensado para eliminar uma tarefa que você faz manualmente hoje.",
+      sub: "Cada ferramenta foi pensada para eliminar uma tarefa que você faz manualmente hoje.",
       scrollHint: "Role para ver tudo",
       items: [
         {
