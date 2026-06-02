@@ -25,7 +25,7 @@ const featureImages: FeatureImage[] = [
     number: "02",
     image: "/images/glamping-walkway.jpg",
     imageAlt: "Passarela de glamping entre as cabines",
-    aspectRatio: "4/3",
+    aspectRatio: "16/9",
   },
   {
     number: "03",
@@ -39,7 +39,7 @@ const featureImages: FeatureImage[] = [
     number: "04",
     image: "/images/cabin-interior.png",
     imageAlt: "Interior aconchegante de uma hospedagem",
-    aspectRatio: "4/3",
+    aspectRatio: "16/9",
   },
 ];
 
