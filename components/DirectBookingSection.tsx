@@ -53,7 +53,7 @@ export default function DirectBookingSection() {
     return () => observer.disconnect();
   }, []);
 
-  const DURATION = 1300;
+  const DURATION = 2200;
   const otaValue   = useCounterAnimation(425, DURATION, animated);
   const feeValue   = useCounterAnimation(75,  DURATION, animated);
   const directValue = useCounterAnimation(500, DURATION, animated);
@@ -151,7 +151,7 @@ export default function DirectBookingSection() {
                     style={{
                       width: otaWidth,
                       backgroundColor: "var(--color-musgo)",
-                      transition: animated ? "width 1.3s cubic-bezier(0.22,1,0.36,1)" : "none",
+                      transition: animated ? "width 2.2s cubic-bezier(0.22,1,0.36,1)" : "none",
                     }}
                   />
                 </div>
@@ -183,7 +183,7 @@ export default function DirectBookingSection() {
                     style={{
                       width: directWidth,
                       backgroundColor: "var(--color-dourado)",
-                      transition: animated ? "width 1.3s cubic-bezier(0.22,1,0.36,1)" : "none",
+                      transition: animated ? "width 2.2s cubic-bezier(0.22,1,0.36,1)" : "none",
                     }}
                   />
                 </div>
